@@ -1,35 +1,59 @@
-body { 
-    margin: 0; background: #000; overflow: hidden; 
-    font-family: 'Poppins', sans-serif; 
+:root {
+    --accent: #00f2ff;
+    --bg: #050508;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+body {
+    margin: 0; background: var(--bg); overflow: hidden;
+    font-family: 'Inter', sans-serif; color: white;
     user-select: none; -webkit-tap-highlight-color: transparent;
 }
 
-#game-ui {
-    position: absolute; top: 15%; width: 100%; text-align: center;
-    color: white; pointer-events: none; z-index: 10;
+#top-nav {
+    position: absolute; width: 100%; top: 50px; display: flex; 
+    justify-content: space-between; padding: 0 30px;
+    font-size: 10px; letter-spacing: 2px; font-weight: 900; opacity: 0.5; z-index: 20;
 }
 
-#score-label { font-size: 100px; font-weight: 900; opacity: 0.9; }
+#score-display {
+    position: absolute; width: 100%; top: 12%; text-align: center; z-index: 20;
+}
+
+#current-score {
+    font-family: 'Syncopate', sans-serif; font-size: 90px; margin: 0;
+    background: linear-gradient(to bottom, #fff, #666);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
 
 #perfect-notif {
-    color: #00ffcc; font-size: 24px; letter-spacing: 5px;
-    opacity: 0; transform: scale(0.8);
+    color: var(--accent); font-weight: 900; letter-spacing: 5px;
+    opacity: 0; transform: scale(0.5);
 }
 
-#mobile-menu {
-    position: absolute; inset: 0; background: radial-gradient(circle at center, #1e1e2f 0%, #000 100%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    z-index: 100; padding-bottom: env(safe-area-inset-bottom);
+#overlay {
+    position: absolute; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, #1a1a2e, #000);
 }
 
-.logo { font-size: 50px; color: white; margin: 0; letter-spacing: 2px; }
-.logo span { color: #ff3e00; }
+.glass-card {
+    background: var(--glass); backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,0.1); padding: 50px 30px;
+    border-radius: 40px; text-align: center; width: 85%;
+}
 
-.instructions { color: #888; margin-top: 10px; font-size: 14px; }
+.logo-text { font-family: 'Syncopate', sans-serif; font-size: 32px; letter-spacing: 5px; }
+.logo-text span { color: var(--accent); text-shadow: 0 0 20px var(--accent); }
 
-#start-btn {
-    margin-top: 50px; width: 80%; max-width: 300px; height: 70px;
-    background: white; border: none; border-radius: 20px;
-    font-size: 20px; font-weight: 900; color: black; cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+#play-trigger {
+    margin-top: 30px; width: 100%; height: 65px; background: white;
+    border: none; border-radius: 18px; font-weight: 900; font-size: 18px;
+}
+
+#audio-toggle {
+    position: absolute; bottom: 40px; right: 30px; width: 55px; height: 55px;
+    background: var(--glass); backdrop-filter: blur(10px); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; z-index: 110;
+    border: 1px solid rgba(255,255,255,0.1); font-size: 22px;
 }

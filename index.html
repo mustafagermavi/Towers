@@ -2,28 +2,25 @@
 <html lang="ku">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tower Stack Ultra 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Stack Mobile Ultra</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="start-screen">
-        <h1 class="logo">TOWER <span>STACK</span></h1>
-        <p>بۆ دەستپێکردن کلیک بکە</p>
-        <button id="startBtn">START</button>
+    <div id="game-ui">
+        <div id="score-label">0</div>
+        <div id="perfect-notif">EXCELLENT!</div>
     </div>
 
-    <div id="ui">
-        <h1 id="bg-score">0</h1>
-        <div id="current-score">0</div>
-        <div id="message">PERFECT!</div>
+    <div id="mobile-menu">
+        <h1 class="logo">STACK<span>GO</span></h1>
+        <div class="instructions">کلیک بکە بۆ دانانی بلۆکەکە</div>
+        <button id="start-btn">دەستپێکردن</button>
     </div>
-
-    <div id="sound-btn">🔊</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

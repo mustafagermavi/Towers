@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Stack Mobile Ultra</title>
+    <title>STACK ELITE PRO</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="game-ui">
-        <div id="score-label">0</div>
-        <div id="perfect-notif">EXCELLENT!</div>
-    </div>
+    <div id="app-container">
+        <nav id="top-nav">
+            <div class="status">NEON ENGINE v2.0</div>
+            <div id="best-tag">BEST: 0</div>
+        </nav>
 
-    <div id="mobile-menu">
-        <h1 class="logo">STACK<span>GO</span></h1>
-        <div class="instructions">کلیک بکە بۆ دانانی بلۆکەکە</div>
-        <button id="start-btn">دەستپێکردن</button>
+        <div id="score-display">
+            <h2 id="current-score">0</h2>
+            <div id="perfect-notif">EXCELLENT</div>
+        </div>
+
+        <div id="game-canvas-wrapper"></div>
+
+        <div id="overlay">
+            <div class="glass-card">
+                <h1 class="logo-text">STACK<span>PRO</span></h1>
+                <p class="subtitle">ئەزموونی گرافیکی بەرز</p>
+                <button id="play-trigger">دەستپێکردن</button>
+            </div>
+        </div>
+
+        <div id="audio-toggle">🔊</div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>STACK ELITE PRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TOWER RUSH PIXEL - DEMO</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app-container">
-        <nav id="top-nav">
-            <div class="status">NEON ENGINE v2.0</div>
-            <div id="best-tag">BEST: 0</div>
-        </nav>
-
-        <div id="score-display">
-            <h2 id="current-score">0</h2>
-            <div id="perfect-notif">EXCELLENT</div>
+    <div class="game-wrapper">
+        <div class="header">
+            <div class="multiplier" id="multi">x1.00</div>
+            <div class="balance">DEMO MODE</div>
         </div>
 
-        <div id="game-canvas-wrapper"></div>
-
-        <div id="overlay">
-            <div class="glass-card">
-                <h1 class="logo-text">STACK<span>PRO</span></h1>
-                <p class="subtitle">ئەزموونی گرافیکی بەرز</p>
-                <button id="play-trigger">دەستپێکردن</button>
+        <div class="game-area">
+            <div class="crane" id="crane">
+                <div class="rope"></div>
+                <div class="block active-block"></div>
+            </div>
+            
+            <div id="tower-container">
+                <div class="base">BASE</div>
             </div>
         </div>
 
-        <div id="audio-toggle">🔊</div>
+        <div class="ui-panel">
+            <div class="bet-controls">
+                <button class="small-btn">MIN</button>
+                <div class="amount-box">0.10 TON</div>
+                <button class="small-btn">MAX</button>
+            </div>
+            <button id="build-btn" class="hazard-button">BUILD</button>
+        </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,47 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'VT323', monospace; }
-
-body { background: #1a1a1a; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
-
-.game-wrapper {
-    width: 100%; max-width: 400px; height: 100dvh;
-    background: #2c3e50; border: 6px solid #000;
-    display: flex; flex-direction: column; position: relative;
+:root {
+    --gold: #ffcc00;
+    --red: #ff3366;
+    --neon: #00ffff;
 }
 
-.header { display: flex; justify-content: space-between; padding: 15px; z-index: 10; }
-.multiplier { font-size: 40px; color: #f1c40f; text-shadow: 3px 3px #000; }
-.balance { background: #000; color: #0f0; padding: 5px 10px; border: 2px solid #fff; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Press Start 2P', cursive; }
 
-.game-area { flex: 1; position: relative; overflow: hidden; background: #34495e; }
+body { background: #000; overflow: hidden; touch-action: none; }
 
-.crane { position: absolute; top: 0; left: 50%; width: 50px; transform: translateX(-50%); z-index: 5; }
-.rope { width: 4px; height: 100px; background: #000; margin: 0 auto; }
+#game-container {
+    width: 100vw; height: 100vh; position: relative;
+    background: #020205; overflow: hidden;
+}
+
+/* UI Elements */
+.ui-layer {
+    position: absolute; top: 20px; width: 100%; display: flex;
+    justify-content: space-between; padding: 0 20px; z-index: 100;
+}
+
+.multiplier-container {
+    position: relative; width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 14px;
+}
+
+.glow-ring {
+    position: absolute; width: 100%; height: 100%;
+    border: 3px solid var(--gold); border-radius: 50%;
+    box-shadow: 0 0 15px var(--gold); animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.2); opacity: 0; } }
+
+/* Crane & Blocks */
+#world { height: 100%; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+#crane { position: absolute; top: 0; left: 50%; z-index: 50; }
+.rope { width: 2px; height: 160px; background: #555; margin: 0 auto; }
 
 .block {
-    width: 50px; height: 40px; background: #e74c3c; border: 4px solid #000;
-    box-shadow: inset -4px -4px 0 rgba(0,0,0,0.3);
+    width: 70px; height: 45px; background: var(--red);
+    border: 3px solid #000; position: relative;
+    box-shadow: inset -4px -4px 0 rgba(0,0,0,0.4);
 }
 
-#tower-container {
-    position: absolute; bottom: 0; width: 100%;
-    display: flex; flex-direction: column-reverse; align-items: center;
-    transition: transform 0.3s ease;
+.base-plate {
+    width: 140px; height: 60px; background: #2c3e50;
+    border: 4px solid #fff; color: #fff; font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
 }
 
-.base {
-    width: 100px; height: 60px; background: #27ae60;
-    border: 4px solid #000; color: #fff; text-align: center; line-height: 50px; font-size: 20px;
+/* Master Build Button */
+.bet-panel {
+    position: absolute; bottom: 0; width: 100%; padding: 25px;
+    background: linear-gradient(transparent, #000 40%); z-index: 110;
 }
 
-.ui-panel { background: #000; padding: 20px; border-top: 4px solid #444; }
-.bet-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-.small-btn { background: #34495e; color: #fff; border: 2px solid #fff; padding: 5px 10px; }
-.amount-box { color: #f1c40f; font-size: 22px; }
-
-.hazard-button {
-    width: 100%; height: 70px; font-size: 35px; color: #fff; border: 4px solid #fff;
-    background: repeating-linear-gradient(45deg, #f1c40f, #f1c40f 20px, #000 20px, #000 40px);
-    text-shadow: 2px 2px #000; cursor: pointer;
+.build-btn-master {
+    width: 100%; height: 80px; border: none; border-radius: 12px;
+    background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 20px, #000 20px, #000 40px);
+    color: #fff; font-size: 32px; font-weight: bold; text-shadow: 3px 3px 0 #000;
+    cursor: pointer; border: 4px solid #fff; transition: 0.1s;
 }
+
+.build-btn-master:active { transform: translateY(6px); box-shadow: 0 2px 0 #000; }

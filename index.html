@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CYBER-X | PRO RISK SYSTEM</title>
+    <title>CYBER-X | PRO CHICKEN ROAD</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,11 +12,11 @@
 
         <header class="system-hud">
             <div class="stat-group">
-                <span class="label">MULTIPLIER</span>
+                <span class="label">CURRENT MULTI</span>
                 <span id="multi-text" class="value cyan-glow">1.00x</span>
             </div>
             <div class="stat-group">
-                <span class="label">NEXT STEP</span>
+                <span class="label">NEXT REWARD</span>
                 <span id="next-win" class="value gold-glow">1.25x</span>
             </div>
         </header>
@@ -24,15 +24,15 @@
         <main id="viewport">
             <div id="road-stage">
                 <div class="grid-lines"></div>
-                <div id="player" class="chicken-sprite"></div>
+                <div id="player" class="chicken-icon"></div>
             </div>
         </main>
 
         <footer class="control-deck">
-            <div class="lane-tracker">LANE PROGRESSION: <span id="lane-count">0</span> / 20</div>
+            <div class="lane-tracker">LANE: <span id="lane-count">0</span> / 20</div>
             <div class="action-grid">
                 <button id="step-btn" class="btn-primary">CROSS NEXT LANE</button>
-                <button id="cash-btn" class="btn-secondary" disabled>SECURE WINNINGS</button>
+                <button id="cash-btn" class="btn-secondary" disabled>CASH OUT</button>
             </div>
         </footer>
 
@@ -40,8 +40,8 @@
             <div class="modal-box">
                 <h1 id="modal-status" class="blink">SYSTEM BUSTED</h1>
                 <div class="data-results">
-                    <p>TOTAL MULTI: <span id="res-multi">0.00x</span></p>
-                    <p>LANE DEPTH: <span id="res-lane">0</span></p>
+                    <p>TOTAL WIN: <span id="res-multi">0.00x</span></p>
+                    <p>DISTANCE: <span id="res-lane">0</span> LANES</p>
                 </div>
                 <button onclick="location.reload()" class="btn-reboot">REBOOT SYSTEM</button>
             </div>

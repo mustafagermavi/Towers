@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TOWER RUSH PIXEL - DEMO</title>
+    <title>TOWER RUSH ULTIMATE</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-wrapper">
-        <div class="header">
-            <div class="multiplier" id="multi">x1.00</div>
-            <div class="balance">DEMO MODE</div>
+    <div id="game-container">
+        <div class="sky-gradient"></div>
+        <div class="stars"></div>
+        
+        <div class="ui-layer">
+            <div class="multiplier-container">
+                <div class="glow-ring"></div>
+                <div id="multi-text">1.0x</div>
+            </div>
+            <div id="ton-connect-button"></div>
         </div>
 
-        <div class="game-area">
-            <div class="crane" id="crane">
+        <div id="world">
+            <div id="crane">
                 <div class="rope"></div>
-                <div class="block active-block"></div>
+                <div class="block active-block" id="current-block"></div>
             </div>
-            
-            <div id="tower-container">
-                <div class="base">BASE</div>
+            <div id="stack">
+                <div class="base-plate">FOUNDATION</div>
             </div>
         </div>
 
-        <div class="ui-panel">
-            <div class="bet-controls">
-                <button class="small-btn">MIN</button>
-                <div class="amount-box">0.10 TON</div>
-                <button class="small-btn">MAX</button>
+        <div class="bet-panel">
+            <div class="bet-adjuster">
+                <button class="adjust-btn" onclick="adjustBet(-0.1)">-</button>
+                <div class="bet-value"><span id="bet-amt">0.10</span> <small>TON</small></div>
+                <button class="adjust-btn" onclick="adjustBet(0.1)">+</button>
             </div>
-            <button id="build-btn" class="hazard-button">BUILD</button>
+            <button id="drop-trigger" class="build-btn-master">BUILD</button>
         </div>
     </div>
     <script src="script.js"></script>

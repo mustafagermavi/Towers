@@ -1,35 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+:root {
+    --bg-dark: #081820;
+    --green-dark: #346856;
+    --green-mid: #88c070;
+    --green-light: #e0f8d0;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Press Start 2P', cursive; image-rendering: pixelated; }
-body { background: #000; overflow: hidden; touch-action: none; position: fixed; width: 100%; height: 100%; }
+
+body { background: var(--bg-dark); overflow: hidden; touch-action: none; position: fixed; width: 100%; height: 100%; }
 
 #game-container { 
-    width: 100vw; height: 100dvh; background: #0b0b1a;
-    background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(100px 100px at 50% 50%, #1a1a2e, #0b0b1a);
+    width: 100vw; height: 100dvh; 
+    background: var(--green-mid);
+    border: 8px solid var(--bg-dark);
     display: flex; flex-direction: column; position: relative;
 }
 
-.pixel-hud { position: absolute; top: 15px; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; z-index: 100; }
-.score-card { background: rgba(0,0,0,0.8); border: 3px solid #fff; padding: 8px; text-align: center; }
-.p-label { font-size: 6px; color: #00f2ff; margin-bottom: 4px; }
-#multi-text, #high-score { font-size: 10px; color: #fff; }
+/* شاشەی یارییەکە وەک شاشەی گەیم بۆی */
+#stage { 
+    flex: 1; position: relative; overflow: hidden; 
+    background: var(--green-mid);
+    border: 4px solid var(--green-dark);
+    margin: 10px;
+}
 
-#stage { flex: 1; position: relative; overflow: hidden; }
-#crane { position: absolute; top: 80px; left: 0; width: 80px; z-index: 50; }
-.p-block { width: 80px; height: 40px; background: #ff3e3e; border: 4px solid #000; box-shadow: inset -4px -4px 0 #9e1b1b, inset 4px 4px 0 #ff7e7e; }
+.pixel-hud { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; z-index: 100; }
+.score-card { background: var(--bg-dark); border: 2px solid var(--green-light); padding: 5px; color: var(--green-light); }
+.p-label { font-size: 6px; margin-bottom: 4px; color: var(--green-mid); }
 
-#stack-container { position: absolute; bottom: 80px; width: 100%; display: flex; flex-direction: column-reverse; align-items: center; transition: transform 0.4s steps(5); }
-.p-base { width: 120px; height: 50px; background: #2ecc71; border: 4px solid #000; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 8px; }
+#crane { position: absolute; top: 40px; left: 0; width: 80px; z-index: 50; }
 
-.pixel-dash { background: #000; padding: 25px; border-top: 6px solid #444; text-align: center; }
-.info-row { margin-bottom: 15px; font-size: 10px; color: #f1c40f; }
-.pixel-btn { width: 100%; height: 65px; background: #f1c40f; border: 4px solid #fff; box-shadow: 6px 6px 0 #8e44ad; color: #000; font-size: 14px; cursor: pointer; }
+/* بلۆکەکان بە ڕەنگی تێر و کاڵ بۆ دروستکردنی قووڵایی */
+.p-block { 
+    width: 80px; height: 40px; 
+    background: var(--green-dark); 
+    border: 4px solid var(--bg-dark); 
+    box-shadow: inset -4px -4px 0 var(--bg-dark), inset 4px 4px 0 var(--green-mid); 
+}
 
-.hidden { display: none !important; }
-#game-over-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 200; display: flex; justify-content: center; align-items: center; }
-.pixel-modal { background: #000; border: 6px solid #ff3e3e; padding: 30px; text-align: center; }
-.blink-text { color: #ff3e3e; font-size: 18px; animation: blink 0.5s infinite; margin-bottom: 20px; }
-.retry-btn { background: #2ecc71; border: 4px solid #fff; padding: 15px; font-family: 'Press Start 2P'; cursor: pointer; }
+#stack-container { position: absolute; bottom: 40px; width: 100%; display: flex; flex-direction: column-reverse; align-items: center; }
+.p-base { width: 120px; height: 40px; background: var(--bg-dark); border: 2px solid var(--green-light); color: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 8px; }
 
-.particle { position: fixed; width: 6px; height: 6px; background: #fff; pointer-events: none; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.pixel-dash { background: var(--bg-dark); padding: 20px; border-top: 4px solid var(--green-dark); }
+.pixel-btn { 
+    width: 100%; height: 60px; 
+    background: var(--green-light); border: 4px solid var(--bg-dark); 
+    box-shadow: 4px 4px 0 var(--green-dark); color: var(--bg-dark); 
+    font-size: 14px; cursor: pointer; 
+}
+
+/* شاشەی کۆتایی */
+.pixel-modal { background: var(--bg-dark); border: 6px solid var(--green-light); padding: 30px; text-align: center; color: var(--green-light); }
+.retry-btn { background: var(--green-mid); border: 2px solid var(--green-light); padding: 10px; color: var(--bg-dark); cursor: pointer; margin-top: 10px; }
+
+.particle { position: fixed; width: 5px; height: 5px; background: var(--green-light); pointer-events: none; }

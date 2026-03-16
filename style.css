@@ -1,69 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-:root {
-    --gold: #ffcc00;
-    --red: #ff3366;
-    --neon: #00ffff;
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Press Start 2P', cursive; }
-
 body { background: #000; overflow: hidden; touch-action: none; }
-
-#game-container {
-    width: 100vw; height: 100vh; position: relative;
-    background: #020205; overflow: hidden;
-}
-
-/* UI Elements */
-.ui-layer {
-    position: absolute; top: 20px; width: 100%; display: flex;
-    justify-content: space-between; padding: 0 20px; z-index: 100;
-}
-
-.multiplier-container {
-    position: relative; width: 80px; height: 80px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 14px;
-}
-
-.glow-ring {
-    position: absolute; width: 100%; height: 100%;
-    border: 3px solid var(--gold); border-radius: 50%;
-    box-shadow: 0 0 15px var(--gold); animation: pulse 2s infinite;
-}
-
-@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.2); opacity: 0; } }
-
-/* Crane & Blocks */
+#game-container { width: 100vw; height: 100vh; position: relative; background: radial-gradient(circle, #1a1a2e, #000); }
+.hud { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; z-index: 100; }
+.multiplier-box { text-align: right; color: #f1c40f; }
+.multiplier-box .label { font-size: 8px; display: block; color: #fff; margin-bottom: 4px; }
 #world { height: 100%; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
-
-#crane { position: absolute; top: 0; left: 50%; z-index: 50; }
-.rope { width: 2px; height: 160px; background: #555; margin: 0 auto; }
-
-.block {
-    width: 70px; height: 45px; background: var(--red);
-    border: 3px solid #000; position: relative;
-    box-shadow: inset -4px -4px 0 rgba(0,0,0,0.4);
-}
-
-.base-plate {
-    width: 140px; height: 60px; background: #2c3e50;
-    border: 4px solid #fff; color: #fff; font-size: 10px;
-    display: flex; align-items: center; justify-content: center;
-}
-
-/* Master Build Button */
-.bet-panel {
-    position: absolute; bottom: 0; width: 100%; padding: 25px;
-    background: linear-gradient(transparent, #000 40%); z-index: 110;
-}
-
-.build-btn-master {
-    width: 100%; height: 80px; border: none; border-radius: 12px;
-    background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 20px, #000 20px, #000 40px);
-    color: #fff; font-size: 32px; font-weight: bold; text-shadow: 3px 3px 0 #000;
-    cursor: pointer; border: 4px solid #fff; transition: 0.1s;
-}
-
-.build-btn-master:active { transform: translateY(6px); box-shadow: 0 2px 0 #000; }
+#crane { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 50; }
+.wire { width: 2px; height: 150px; background: #444; margin: 0 auto; }
+.block { width: 80px; height: 45px; background: #ff0055; border: 3px solid #000; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.3); }
+.base-plate { width: 150px; height: 70px; background: #2c3e50; border: 4px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
+.ui-panel { position: absolute; bottom: 0; width: 100%; padding: 20px; background: rgba(0,0,0,0.85); border-top: 3px solid #333; }
+.stats { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 15px; color: #00f2ff; }
+.hazard-button { width: 100%; height: 75px; border: 4px solid #fff; font-size: 20px; color: #fff; background: repeating-linear-gradient(45deg, #f1c40f, #f1c40f 20px, #000 20px, #000 40px); cursor: pointer; text-shadow: 2px 2px 0 #000; }

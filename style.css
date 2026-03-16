@@ -1,58 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    --bg-dark: #081820;
-    --green-dark: #346856;
-    --green-mid: #88c070;
-    --green-light: #e0f8d0;
+    --bg: #000000;
+    --low: #333333;
+    --mid: #999999;
+    --high: #ffffff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Press Start 2P', cursive; image-rendering: pixelated; }
 
-body { background: var(--bg-dark); overflow: hidden; touch-action: none; position: fixed; width: 100%; height: 100%; }
+body { background: var(--bg); color: var(--high); overflow: hidden; touch-action: none; }
 
 #game-container { 
     width: 100vw; height: 100dvh; 
-    background: var(--green-mid);
-    border: 8px solid var(--bg-dark);
+    border: 4px solid var(--low);
     display: flex; flex-direction: column; position: relative;
 }
 
-/* شاشەی یارییەکە وەک شاشەی گەیم بۆی */
-#stage { 
-    flex: 1; position: relative; overflow: hidden; 
-    background: var(--green-mid);
-    border: 4px solid var(--green-dark);
-    margin: 10px;
-}
+.pixel-hud { padding: 20px; display: flex; justify-content: space-between; z-index: 100; }
+.score-card { background: var(--bg); border: 2px solid var(--high); padding: 8px; text-align: center; }
+.p-label { font-size: 8px; color: var(--mid); margin-bottom: 5px; }
 
-.pixel-hud { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; z-index: 100; }
-.score-card { background: var(--bg-dark); border: 2px solid var(--green-light); padding: 5px; color: var(--green-light); }
-.p-label { font-size: 6px; margin-bottom: 4px; color: var(--green-mid); }
+#stage { flex: 1; position: relative; overflow: hidden; transition: filter 0.2s; }
 
-#crane { position: absolute; top: 40px; left: 0; width: 80px; z-index: 50; }
+/* Screen Shake Effect */
+.shake { animation: shake 0.1s steps(2) infinite; }
+@keyframes shake { 0% { transform: translate(2px,2px); } 100% { transform: translate(-2px,-2px); } }
 
-/* بلۆکەکان بە ڕەنگی تێر و کاڵ بۆ دروستکردنی قووڵایی */
+#crane { position: absolute; top: 60px; left: 0; width: 80px; }
 .p-block { 
     width: 80px; height: 40px; 
-    background: var(--green-dark); 
-    border: 4px solid var(--bg-dark); 
-    box-shadow: inset -4px -4px 0 var(--bg-dark), inset 4px 4px 0 var(--green-mid); 
+    background: var(--mid); border: 4px solid var(--bg); 
+    box-shadow: inset -4px -4px 0 var(--low), inset 4px 4px 0 var(--high);
 }
 
-#stack-container { position: absolute; bottom: 40px; width: 100%; display: flex; flex-direction: column-reverse; align-items: center; }
-.p-base { width: 120px; height: 40px; background: var(--bg-dark); border: 2px solid var(--green-light); color: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 8px; }
+#stack-container { position: absolute; bottom: 20px; width: 100%; display: flex; flex-direction: column-reverse; align-items: center; transition: transform 0.3s steps(4); }
+.p-base { width: 140px; height: 40px; background: var(--low); border: 2px solid var(--high); color: var(--high); display: flex; align-items: center; justify-content: center; font-size: 10px; }
 
-.pixel-dash { background: var(--bg-dark); padding: 20px; border-top: 4px solid var(--green-dark); }
+.pixel-dash { background: var(--bg); padding: 20px; border-top: 4px solid var(--low); }
 .pixel-btn { 
-    width: 100%; height: 60px; 
-    background: var(--green-light); border: 4px solid var(--bg-dark); 
-    box-shadow: 4px 4px 0 var(--green-dark); color: var(--bg-dark); 
-    font-size: 14px; cursor: pointer; 
+    width: 100%; height: 60px; background: var(--high); color: var(--bg); 
+    border: none; font-size: 14px; cursor: pointer; box-shadow: 6px 6px 0 var(--low);
 }
+.pixel-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--low); }
 
-/* شاشەی کۆتایی */
-.pixel-modal { background: var(--bg-dark); border: 6px solid var(--green-light); padding: 30px; text-align: center; color: var(--green-light); }
-.retry-btn { background: var(--green-mid); border: 2px solid var(--green-light); padding: 10px; color: var(--bg-dark); cursor: pointer; margin-top: 10px; }
+/* Modals */
+.hidden { display: none !important; }
+#game-over-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+.pixel-modal { border: 4px solid var(--high); padding: 40px; text-align: center; }
+.blink-text { animation: blink 0.5s steps(2) infinite; margin-bottom: 20px; }
+.retry-btn { margin-top: 20px; background: var(--bg); color: var(--high); border: 2px solid var(--high); padding: 10px; cursor: pointer; }
 
-.particle { position: fixed; width: 5px; height: 5px; background: var(--green-light); pointer-events: none; }
+@keyframes blink { 0% { opacity: 1; } 100% { opacity: 0; } }

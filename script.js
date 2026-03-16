@@ -1,83 +1,76 @@
-const crane = document.getElementById('crane');
-const stack = document.getElementById('stack-container');
-const actionBtn = document.getElementById('action-btn');
-const floorText = document.getElementById('floor-count');
-const multiText = document.getElementById('multi-text');
-const stage = document.getElementById('stage');
+const player = document.getElementById('player');
+const stage = document.getElementById('road-stage');
+const stepBtn = document.getElementById('step-btn');
+const cashBtn = document.getElementById('cash-btn');
+const multiVal = document.getElementById('multi-text');
+const nextVal = document.getElementById('next-win');
+const laneVal = document.getElementById('lane-count');
 
-let score = 0, isDropping = false, currentWidth = 80;
-let craneX = 0, craneDir = 1, speed = 5;
+let laneProgress = 0;
+let currentMulti = 1.00;
+let isActive = true;
 
-// Pixel-perfect horizontal movement
-function moveCrane() {
-    if (!isDropping) {
-        craneX += speed * craneDir;
-        if (craneX > window.innerWidth - currentWidth - 20 || craneX < 0) craneDir *= -1;
-        crane.style.left = Math.round(craneX) + 'px';
-    }
-    requestAnimationFrame(moveCrane);
-}
-moveCrane();
+// Pro Risk Curve: Multipliers grow faster at higher lanes
+const curve = [
+    1.25, 1.60, 2.10, 2.80, 3.75, 5.00, 6.80, 9.20, 12.50, 17.00,
+    23.50, 32.00, 45.00, 62.00, 85.00, 120.0, 175.0, 250.0, 400.0, 1000.0
+];
 
-actionBtn.onclick = () => { if (!isDropping) dropBlock(); };
+stepBtn.onclick = () => {
+    if (!isActive) return;
 
-function dropBlock() {
-    isDropping = true;
-    const activeRect = document.getElementById('active-block').getBoundingClientRect();
-    const block = document.createElement('div');
-    block.className = 'p-block';
-    block.style.cssText = `position:fixed; left:${activeRect.left}px; top:${activeRect.top}px; width:${currentWidth}px;`;
-    document.body.appendChild(block);
-
-    let y = activeRect.top, vel = 0;
-    const fall = setInterval(() => {
-        vel += 1.5; // Heavier gravity for arcade feel
-        y += vel;
-        block.style.top = Math.round(y) + 'px';
-        
-        const lastB = stack.lastElementChild.getBoundingClientRect();
-        if (y + 40 >= lastB.top) { 
-            clearInterval(fall); 
-            handleLanding(block, activeRect.left, lastB.left); 
-        }
-    }, 16);
-}
-
-function handleLanding(block, x, targetX) {
-    const diff = x - targetX;
+    // RISK ALGORITHM: Increases with Lane
+    // Starts at 12% bust chance, adds 2% every lane
+    let bustRisk = 0.12 + (laneProgress * 0.02);
     
-    if (Math.abs(diff) >= currentWidth) { 
-        triggerGameOver(); 
-        return; 
+    if (Math.random() < bustRisk) {
+        systemBust();
+        return;
     }
 
-    // Impact Effect (Screen Shake)
-    stage.classList.add('shake');
-    setTimeout(() => stage.classList.remove('shake'), 100);
+    // SUCCESS
+    laneProgress++;
+    currentMulti = curve[laneProgress - 1];
+    
+    // Smooth Transitions
+    updateDisplay();
+    player.style.bottom = (24 + (laneProgress * 80)) + "px";
+    
+    if (laneProgress > 2) {
+        stage.style.transform = `translateY(${(laneProgress - 2) * 80}px)`;
+    }
 
-    currentWidth -= Math.abs(diff);
-    block.remove();
+    cashBtn.disabled = false;
     
-    const landed = document.createElement('div');
-    landed.className = 'p-block';
-    landed.style.width = currentWidth + 'px';
-    landed.style.marginLeft = (diff / 2) + 'px';
-    stack.appendChild(landed);
+    // Visual Feedback
+    document.body.style.backgroundColor = "#111122";
+    setTimeout(() => document.body.style.backgroundColor = "#050508", 50);
+};
 
-    score++;
-    speed += 0.4;
-    floorText.innerText = score;
-    multiText.innerText = (1 + score * 0.2).toFixed(1) + "x";
-    
-    // Camera scroll up
-    if (score > 3) stack.style.transform = `translateY(${(score - 3) * 40}px)`;
-    
-    document.getElementById('active-block').style.width = currentWidth + 'px';
-    isDropping = false;
+cashBtn.onclick = () => {
+    if (cashBtn.disabled || !isActive) return;
+    showEndScreen("MISSION SUCCESS", "var(--cyan)");
+};
+
+function updateDisplay() {
+    multiVal.innerText = currentMulti.toFixed(2) + "x";
+    nextVal.innerText = curve[laneProgress].toFixed(2) + "x";
+    laneVal.innerText = laneProgress;
 }
 
-function triggerGameOver() {
-    document.getElementById('game-over-screen').classList.remove('hidden');
-    document.getElementById('final-floor').innerText = score;
-    stage.style.filter = "invert(1)";
+function systemBust() {
+    isActive = false;
+    player.style.backgroundColor = "var(--pink)";
+    player.style.boxShadow = "0 0 30px var(--pink)";
+    setTimeout(() => showEndScreen("SYSTEM BUSTED", "var(--pink)"), 400);
+}
+
+function showEndScreen(title, color) {
+    isActive = false;
+    document.getElementById('overlay').classList.remove('hidden');
+    const status = document.getElementById('modal-status');
+    status.innerText = title;
+    status.style.color = color;
+    document.getElementById('res-multi').innerText = currentMulti.toFixed(2) + "x";
+    document.getElementById('res-lane').innerText = laneProgress;
 }

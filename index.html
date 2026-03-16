@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PIXEL TOWER DEMO</title>
+    <title>RETRO TOWER | LIMITED PALETTE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <div class="pixel-hud">
+        <header class="pixel-hud">
             <div class="score-card">
-                <div class="p-label">MULTI</div>
-                <div id="multi-text">1.0x</div>
+                <span class="p-label">FLOOR</span>
+                <span id="floor-count">0</span>
             </div>
             <div class="score-card">
-                <div class="p-label">BEST</div>
-                <div id="high-score">0</div>
+                <span class="p-label">MULTI</span>
+                <span id="multi-text">1.0x</span>
             </div>
-        </div>
+        </header>
 
-        <div id="stage">
+        <main id="stage">
             <div id="crane">
                 <div class="p-block" id="active-block"></div>
             </div>
             <div id="stack-container">
                 <div class="p-base">START</div>
             </div>
-        </div>
+        </main>
 
-        <div class="pixel-dash">
-            <div class="info-row">
-                <div class="info-item">FLOOR: <span id="floor-count">0</span></div>
-            </div>
-            <button id="action-btn" class="pixel-btn">DROP!</button>
-        </div>
+        <footer class="pixel-dash">
+            <button id="action-btn" class="pixel-btn">DROP BLOCK</button>
+            <p class="retro-hint">TAP TO STACK</p>
+        </footer>
 
         <div id="game-over-screen" class="hidden">
             <div class="pixel-modal">
                 <h1 class="blink-text">GAME OVER</h1>
                 <div class="final-stats">
-                    <p>FLOORS: <span id="final-floor">0</span></p>
+                    <p>TOTAL FLOORS</p>
+                    <p class="stat-val" id="final-floor">0</p>
                 </div>
-                <button onclick="location.reload()" class="retry-btn">TRY AGAIN</button>
+                <button onclick="location.reload()" class="retry-btn">RETRY</button>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -18,25 +18,32 @@ let angle = 0, speed = 0.05;
 function animate() {
     if (!isDropping) {
         angle += speed;
-        crane.style.transform = `translateX(calc(-50% + ${Math.sin(angle) * 130}px))`;
+        crane.style.transform = `translateX(calc(-50% + ${Math.sin(angle) * 120}px))`;
     }
     requestAnimationFrame(animate);
 }
 animate();
 
 tonConnectUI.onStatusChange(wallet => {
-    mainBtn.innerText = wallet ? "START GAME (0.1 TON)" : "CONNECT WALLET";
+    mainBtn.innerText = wallet ? "PAY 0.1 TON TO START" : "CONNECT WALLET";
 });
 
 mainBtn.onclick = async () => {
     if (!tonConnectUI.connected) { await tonConnectUI.connectWallet(); return; }
+    
     if (!isPaid) {
         try {
-            const tx = { validUntil: Math.floor(Date.now()/1000)+60, messages: [{address: MY_WALLET, amount: "100000000"}] };
+            const tx = { 
+                validUntil: Math.floor(Date.now()/1000) + 60, 
+                messages: [{ address: MY_WALLET, amount: "100000000" }] // 0.1 TON
+            };
             await tonConnectUI.sendTransaction(tx);
-            isPaid = true; mainBtn.innerText = "BUILD!";
-        } catch(e) { alert("Transaction Failed!"); }
-    } else { if(!isDropping) dropBlock(); }
+            isPaid = true; 
+            mainBtn.innerText = "BUILD!";
+        } catch(e) { alert("Transaction Canceled"); }
+    } else { 
+        if(!isDropping) dropBlock(); 
+    }
 };
 
 function dropBlock() {
@@ -52,13 +59,21 @@ function dropBlock() {
         vel += 0.8; y += vel;
         block.style.top = y + 'px';
         const lastRect = stack.lastElementChild.getBoundingClientRect();
-        if (y + 45 >= lastRect.top) { clearInterval(fall); handleLanding(block, rect.left, lastRect.left); }
+        
+        if (y + 45 >= lastRect.top) { 
+            clearInterval(fall); 
+            handleLanding(block, rect.left, lastRect.left); 
+        }
     }, 16);
 }
 
 function handleLanding(block, x, targetX) {
     const diff = x - targetX;
-    if (Math.abs(diff) >= currentWidth) { alert("Game Over! Win: " + winAmt.innerText); location.reload(); return; }
+    if (Math.abs(diff) >= currentWidth) { 
+        alert("GAME OVER! You lost."); 
+        location.reload(); 
+        return; 
+    }
     
     currentWidth -= Math.abs(diff);
     block.remove();
@@ -68,10 +83,12 @@ function handleLanding(block, x, targetX) {
     landed.style.marginLeft = (diff/2) + 'px';
     stack.appendChild(landed);
 
-    score++; speed += 0.005;
+    score++; 
+    speed += 0.005;
     const multi = 1 + (score * 0.5);
     multiText.innerText = multi.toFixed(1) + "x";
-    winAmt.innerText = (0.1 * multi).toFixed(2);
+    winAmt.innerText = (0.1 * multi).toFixed(2) + " TON";
+    
     if (score > 2) world.style.transform = `translateY(${score * 45}px)`;
     document.getElementById('crane-block').style.width = currentWidth + 'px';
     isDropping = false;

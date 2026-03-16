@@ -10,46 +10,70 @@ let laneProgress = 0;
 let currentMulti = 1.00;
 let isActive = true;
 
-// Pro Risk Curve: Multipliers grow faster at higher lanes
-const curve = [
-    1.25, 1.60, 2.10, 2.80, 3.75, 5.00, 6.80, 9.20, 12.50, 17.00,
-    23.50, 32.00, 45.00, 62.00, 85.00, 120.0, 175.0, 250.0, 400.0, 1000.0
-];
+const curve = [1.25, 1.60, 2.10, 2.85, 3.80, 5.10, 6.90, 9.50, 13.0, 18.0, 25.0, 35.0, 50.0, 75.0, 110.0, 160.0, 240.0, 380.0, 600.0, 1000.0];
+
+function spawnEnemyCar(laneY) {
+    const car = document.createElement('div');
+    car.className = 'car-icon';
+    car.style.bottom = (laneY + 25) + 'px';
+    
+    const fromLeft = Math.random() > 0.5;
+    car.style.left = fromLeft ? '-100px' : (window.innerWidth + 100) + 'px';
+    stage.appendChild(car);
+
+    const speed = 4 + (Math.random() * 6);
+    const direction = fromLeft ? 1 : -1;
+
+    const driveLoop = setInterval(() => {
+        if (!isActive) { clearInterval(driveLoop); return; }
+        
+        let x = parseInt(car.style.left);
+        x += speed * direction;
+        car.style.left = x + 'px';
+
+        const pRect = player.getBoundingClientRect();
+        const cRect = car.getBoundingClientRect();
+
+        if (pRect.left < cRect.right && pRect.right > cRect.left &&
+            pRect.top < cRect.bottom && pRect.bottom > cRect.top) {
+            systemBust();
+            clearInterval(driveLoop);
+        }
+
+        if (x > window.innerWidth + 200 || x < -200) {
+            clearInterval(driveLoop);
+            car.remove();
+        }
+    }, 20);
+}
 
 stepBtn.onclick = () => {
     if (!isActive) return;
 
-    // RISK ALGORITHM: Increases with Lane
-    // Starts at 12% bust chance, adds 2% every lane
-    let bustRisk = 0.12 + (laneProgress * 0.02);
-    
-    if (Math.random() < bustRisk) {
+    if (Math.random() < 0.12) { // 12% Risk
         systemBust();
         return;
     }
 
-    // SUCCESS
     laneProgress++;
     currentMulti = curve[laneProgress - 1];
     
-    // Smooth Transitions
     updateDisplay();
     player.style.bottom = (24 + (laneProgress * 80)) + "px";
     
+    // دروستکردنی سەیارە لەگەڵ هەر هەنگاوێک
+    spawnEnemyCar(laneProgress * 80);
+
     if (laneProgress > 2) {
         stage.style.transform = `translateY(${(laneProgress - 2) * 80}px)`;
     }
 
     cashBtn.disabled = false;
-    
-    // Visual Feedback
-    document.body.style.backgroundColor = "#111122";
-    setTimeout(() => document.body.style.backgroundColor = "#050508", 50);
 };
 
 cashBtn.onclick = () => {
     if (cashBtn.disabled || !isActive) return;
-    showEndScreen("MISSION SUCCESS", "var(--cyan)");
+    showEndScreen("WIN SECURED", "var(--cyan)");
 };
 
 function updateDisplay() {
@@ -60,13 +84,11 @@ function updateDisplay() {
 
 function systemBust() {
     isActive = false;
-    player.style.backgroundColor = "var(--pink)";
-    player.style.boxShadow = "0 0 30px var(--pink)";
-    setTimeout(() => showEndScreen("SYSTEM BUSTED", "var(--pink)"), 400);
+    player.style.backgroundColor = "red";
+    setTimeout(() => showEndScreen("SYSTEM BUSTED", "var(--pink)"), 300);
 }
 
 function showEndScreen(title, color) {
-    isActive = false;
     document.getElementById('overlay').classList.remove('hidden');
     const status = document.getElementById('modal-status');
     status.innerText = title;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TOWER RUSH PRO | TON</title>
+    <title>TOWER RUSH ELITE</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,8 +12,8 @@
     <div id="game-container">
         <div class="hud">
             <div id="ton-connect-btn"></div>
-            <div class="multiplier-box">
-                <span class="label">MULTI</span>
+            <div class="multiplier-display">
+                <span class="label">MULTIPLIER</span>
                 <span id="multi-text">1.0x</span>
             </div>
         </div>
@@ -29,11 +29,11 @@
         </div>
 
         <div class="ui-panel">
-            <div class="stats">
-                <span>BET: <b id="bet-amt">0.1</b> TON</span>
-                <span>WIN: <b id="win-amt">0.00</b> TON</span>
+            <div class="bet-stats">
+                <span>BET: <b>0.1 TON</b></span>
+                <span>WIN: <b id="win-amt">0.00</b></span>
             </div>
-            <button id="main-btn" class="hazard-button">CONNECT WALLET</button>
+            <button id="main-btn" class="action-btn">CONNECT WALLET</button>
         </div>
     </div>
     <script src="script.js"></script>

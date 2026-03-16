@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PIXEL TOWER | LIMITED EDITION</title>
+    <title>PIXEL TOWER | SYSTEM-01</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="game-container">
         <div class="pixel-hud">
             <div class="score-card">
-                <span class="p-label">FLOOR</span>
-                <span id="floor-count">0</span>
+                <div class="p-label">FLOOR</div>
+                <div id="floor-count">0</div>
             </div>
             <div class="score-card">
-                <span class="p-label">BEST</span>
-                <span id="high-score">0</span>
+                <div class="p-label">MULTI</div>
+                <div id="multi-text">1.0x</div>
             </div>
         </div>
 
@@ -24,28 +23,26 @@
             <div id="crane">
                 <div class="p-block" id="active-block"></div>
             </div>
-
             <div id="stack-container">
-                <div class="p-base">FOUNDATION</div>
+                <div class="p-base">CORE-BASE</div>
             </div>
         </div>
 
         <div class="pixel-dash">
-            <button id="action-btn" class="pixel-btn">DROP BLOCK</button>
+            <button id="action-btn" class="pixel-btn">EXECUTE DROP</button>
         </div>
 
         <div id="game-over-screen" class="hidden">
             <div class="pixel-modal">
                 <h1 class="blink-text">SYSTEM HALTED</h1>
                 <div class="final-stats">
-                    <p>TOTAL FLOORS</p>
-                    <p class="stat-val" id="final-floor">0</p>
+                    <p>RECORDS SAVED</p>
+                    <p>FLOORS: <span id="final-floor">0</span></p>
                 </div>
-                <button onclick="location.reload()" class="retry-btn">REBOOT</button>
+                <button onclick="location.reload()" class="retry-btn">REBOOT SYSTEM</button>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

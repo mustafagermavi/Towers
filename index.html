@@ -3,37 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TOWER RUSH ELITE</title>
+    <title>PIXEL TOWER RUSH | TON</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <div class="hud">
+        <div class="pixel-hud">
             <div id="ton-connect-btn"></div>
-            <div class="multiplier-display">
-                <span class="label">MULTIPLIER</span>
-                <span id="multi-text">1.0x</span>
+            <div class="score-card">
+                <div class="p-label">MULTI</div>
+                <div id="multi-text">1.0x</div>
             </div>
         </div>
 
-        <div id="world">
+        <div id="stage">
             <div id="crane">
-                <div class="wire"></div>
-                <div class="block" id="crane-block"></div>
+                <div class="p-block" id="active-block"></div>
             </div>
-            <div id="stack">
-                <div class="base-plate">FOUNDATION</div>
+            <div id="stack-container">
+                <div class="p-base">FOUNDATION</div>
             </div>
         </div>
 
-        <div class="ui-panel">
-            <div class="bet-stats">
-                <span>BET: <b>0.1 TON</b></span>
-                <span>WIN: <b id="win-amt">0.00</b></span>
+        <div class="pixel-dash">
+            <div class="info-row">
+                <div class="info-item">FLOOR: <span id="floor-count">0</span></div>
+                <div class="info-item">WIN: <span id="win-amt">0.00</span> TON</div>
             </div>
-            <button id="main-btn" class="action-btn">CONNECT WALLET</button>
+            <button id="action-btn" class="pixel-btn">CONNECT WALLET</button>
+        </div>
+
+        <div id="game-over-screen" class="hidden">
+            <div class="pixel-modal">
+                <h1 class="blink-text">GAME OVER</h1>
+                <div class="final-stats">
+                    <p>FLOORS: <span id="final-floor">0</span></p>
+                    <p>WON: <span id="final-win">0.00</span> TON</p>
+                </div>
+                <button onclick="location.reload()" class="retry-btn">RETRY</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

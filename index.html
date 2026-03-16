@@ -3,44 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RETRO TOWER | LIMITED PALETTE</title>
+    <title>PIXEL TOWER | LIMITED EDITION</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="game-container">
-        <header class="pixel-hud">
+        <div class="pixel-hud">
             <div class="score-card">
                 <span class="p-label">FLOOR</span>
                 <span id="floor-count">0</span>
             </div>
             <div class="score-card">
-                <span class="p-label">MULTI</span>
-                <span id="multi-text">1.0x</span>
+                <span class="p-label">BEST</span>
+                <span id="high-score">0</span>
             </div>
-        </header>
+        </div>
 
-        <main id="stage">
+        <div id="stage">
             <div id="crane">
                 <div class="p-block" id="active-block"></div>
             </div>
-            <div id="stack-container">
-                <div class="p-base">START</div>
-            </div>
-        </main>
 
-        <footer class="pixel-dash">
+            <div id="stack-container">
+                <div class="p-base">FOUNDATION</div>
+            </div>
+        </div>
+
+        <div class="pixel-dash">
             <button id="action-btn" class="pixel-btn">DROP BLOCK</button>
-            <p class="retro-hint">TAP TO STACK</p>
-        </footer>
+        </div>
 
         <div id="game-over-screen" class="hidden">
             <div class="pixel-modal">
-                <h1 class="blink-text">GAME OVER</h1>
+                <h1 class="blink-text">SYSTEM HALTED</h1>
                 <div class="final-stats">
                     <p>TOTAL FLOORS</p>
                     <p class="stat-val" id="final-floor">0</p>
                 </div>
-                <button onclick="location.reload()" class="retry-btn">RETRY</button>
+                <button onclick="location.reload()" class="retry-btn">REBOOT</button>
             </div>
         </div>
     </div>
